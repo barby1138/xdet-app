@@ -1,0 +1,30 @@
+Nov 14 18:55:00:539 13113 [I] number of cores 8
+Nov 14 18:55:00:539 13113 [I] executors 8
+Nov 14 18:55:03:883 13113 [I] on_file_add /home/tsis/data_test/infly/nodet.xml
+Nov 14 18:55:04:383 13114 [I] File: /home/tsis/data_test/infly/nodet.xml cmd_type: audio_match
+Nov 14 18:55:04:383 13114 [I] xml_cmd_audio_match
+Nov 14 18:55:04:383 13114 [I] markers (cmd): path=/home/tsis/data_test/archive/x0/PH/fp
+Nov 14 18:55:04:383 13114 [I] config_ex: mt=79, minqt=3
+Nov 14 18:55:04:383 13114 [I] processor::process id: PH_232
+Nov 14 18:55:04:383 13114 [I] add new processor_channel
+Nov 14 18:55:04:383 13114 [I] processor_channel process id PH_232, q size: 0
+Nov 14 18:55:04:383 13118 [I] processor_channel id PH_232 - wait for msg
+Nov 14 18:55:04:383 13118 [I] handle
+Nov 14 18:55:04:383 13118 [I] type: file
+Nov 14 18:55:04:383 13118 [I] processor id: PH_232
+Nov 14 18:55:04:383 13118 [I] Analize file /home/tsis/data_test/archive/x0/PH/nodet.mp4
+Nov 14 18:55:04:383 13118 [I] FP files:
+Nov 14 18:55:12:786 13118 [I] FP add quant size: 74024
+Nov 14 18:55:12:817 13118 [I] transcode_to_wav_if_needed /home/tsis/data_test/archive/x0/PH/nodet.mp4
+
+Nov 14 18:55:15:293 13118 [I] File to analyze: /home/tsis/data_test/archive/x0/PH/nodet.mp4
+File length: 1614 sec
+Nov 14 19:05:56:052 13118 [I] total 310020880 total_read 310020880
+Nov 14 19:05:56:053 13118 [I] for FP 5760000
+Nov 14 19:05:56:053 13118 [I] left 5748880
+Nov 14 19:05:56:053 13118 [I] EOF
+Nov 14 19:05:56:053 13118 [I] force flush detections
+Nov 14 19:05:56:053 13118 [I]  sect size 9
+
+Nov 14 19:05:56:053 13118 [I] processTime 640760
+Nov 14 19:05:56:102 13118 [I] processor_channel id PH_232 - wait for msg

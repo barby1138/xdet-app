@@ -1,0 +1,49 @@
+html
+	head
+		include layout/header.jade
+		include layout/js.jade
+	body.hold-transition.login-page
+		.login-box
+			.login-logo
+				|<b><font style="background-color: red" color='black'>&nbsp;X&nbsp;</font>det</b>
+				//|<b>onair</b>EAR
+				<br><p style="font-family:'Courier';font-size:76%;">media.monitor.analyze</p>
+			.login-box-body
+				//p.login-box-msg
+					//|Sign in
+				form(action="/login", method="post")
+					.form-group.has-feedback
+						input.form-control(type="text", name="username", placeholder="Email address")
+						span.glyphicon.glyphicon-envelope.form-control-feedback
+					.form-group.has-feedback
+						input.form-control(type="password", name="password", placeholder="Password")
+						span.glyphicon.glyphicon-lock.form-control-feedback
+					.row
+						.col-xs-8
+							.checkbox.icheck
+								label
+									input#input1(type="checkbox") 
+									|&nbsp;Remember Me
+						.col-xs-4
+							button.btn.btn-primary.btn-block.btn-flat(type="submit")
+								|Sign In
+
+				a(href="#")
+					|Forgot password
+				br
+				a.text-center(href="#")
+					|Register
+				br
+				br
+				label
+					|request a <a href="mailto:olitsis@gmail.com?subject=demorequest">DEMO</a>
+
+script.
+
+	$(function () {
+		$('#input1').iCheck({
+			checkboxClass: 'icheckbox_square-blue',
+			radioClass: 'iradio_square-blue',
+			increaseArea: '20%' // optional
+		});
+	});

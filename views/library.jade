@@ -1,0 +1,82 @@
+extends layout/base
+block content 
+	section.content-header 
+	section.content
+		.container(style="width: 100%;")
+				.row.varod(style="width: 100%;")
+						form#demoform(action='' method='post')
+
+		.box#tracks_box
+			.box-header
+				i.fa.fa-fingerprint
+				h3.box-title
+					|Markers
+
+				.box-tools.pull-right
+					a(type="button" href='/feeds' class="btn btn-default btn-sm")
+						i.far.fa-play-circle
+					a(type="button" href='/library' class="btn btn-default btn-sm")
+						i.fa.fa-sync-alt
+			.box-body
+						.container(style='width: 100%;')
+							.row(style='width: 100%;')
+								button(type='button' class='btn btn-primary btn-xs' style='float: right;' onclick='add_track()')
+									i.fa.fa-plus
+										|NEW
+							.row.box#add_track(class='varod slider hide_form' style='width: 100%;')
+								form.form-vertical#add_track_form(action='/add_track' method='post')
+									.form-group.form-row
+										label.col-md-2.col-form-label
+											|Url
+										.col-md-10
+											.input-group(style="width=70% !important;")
+												input#add_track_form_upload_track(type="file" class="filestyle" data-buttonText="" data-input="true" data-buttonBefore="true" data-buttonName="btn-default btn-xs varod" multiple)
+												//input#add_track_form_uploaded_file_name(type="hidden")
+									.form-group.form-row
+										label.col-md-2.col-form-label
+											|Title
+										.col-md-10
+											//.input-group(style="width=70% !important;")
+											input#add_track_form_title(type="text" class="form-control") 
+									.form-group.form-row
+										label.col-md-2.col-form-label
+											|Tags
+										.col-md-10
+											input#add_track_form_tags(type="text" class="form-control") 
+									//.form-group.form-row
+										//label.col-md-2.col-form-label
+											//|Description
+										//.col-md-10
+											//input#add_track_form_descr(type="text" class="form-control") 
+									.form-group.form-row
+										label.col-md-2.col-form-label
+										.col-md-10
+											button(type="submit" class="btn btn-success btn-xs" style="float: right;")
+												|Submit
+											button(type="button" onClick="cancel_add_track()" class="btn btn-default btn-xs" style="float: right;")
+												|Close
+
+							.row#tracks_row(style='width: 100%;')
+								table#tracks.display.table-bordered.row-border(name="tracks_table" cellspacing="0" width="100%")
+									thead
+										tr
+											th 
+											th Title
+											th Tags
+											th Date
+											th Feeds
+											th 
+											th 
+									tbody
+									tfoot
+										tr
+											th 
+											th Title
+											th Tags
+											th Date
+											th Feeds
+											th 
+											th 
+
+block javascript
+	script(type='text/javascript', src='/library.js')

@@ -1,0 +1,44 @@
+
+.main-sidebar.stamp
+	section.sidebar
+		ul.sidebar-menu(data-widget="tree")
+			li(class=(page === '/' || page === '/dashboard') ? 'active' : '')
+				a(href='/')
+					i.fa.fa-tachometer-alt
+					span
+						| Dashboard
+			li(class=(page === '/feeds') ? 'active' : '')
+				a(href='/feeds')
+					i.far.fa-play-circle
+					span
+						| Tubes
+			li(class=(page === '/library') ? 'active' : '')
+				a(href='/library')
+					i.fa.fa-fingerprint
+					span
+						| Markers
+			li(class=(page === '/dets') ? 'active' : '')
+				a(href='/dets')
+					i.fa.fa-eye
+					span
+						| Detections
+			li(class=(page === '/profile') ? 'active' : '')
+				a(href='/profile')
+					i.fa.fa-user
+					span
+						| Profile
+			//li(class=(page === '/arch') ? 'active' : '')
+				//a(href='/arch')
+					//i.fa.fa-archive
+					//span
+						//| Archive
+			li(class=(page === '/tutorial') ? 'active' : '')
+				a(href='/tutorial')
+					i.fa.fa-question
+					span
+						| Help
+			//li(class=(page === '/reports') ? 'active' : '')
+				//a(href='/reports')
+					//i.fa.fa-search
+					//span
+						//| Admin

@@ -1,0 +1,8 @@
+<EAR_settings>
+	<logger level="info" path="ear.log" />
+	<general executors="8" />
+	<folders>
+	<datafolder path="/home/tsis/data_test" />
+	<hotfolder path="/home/tsis/data_test/infly" />
+	</folders>
+</EAR_settings>

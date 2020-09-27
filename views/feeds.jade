@@ -1,0 +1,106 @@
+extends layout/base
+block content 
+	section.content-header 	
+	section.content
+		.container(style="width: 100%;")
+				.row.varod(style="width: 100%;")
+						form#demoform(action='' method='post')
+
+		.box#feeds_box
+			.box-header
+				i.far.fa-play-circle
+				h3.box-title
+					|Tubes
+
+				.box-tools.pull-right
+					a(type="button" href='/library' class="btn btn-default btn-sm")
+						i.fa.fa-fingerprint
+					a(type="button" href='/feeds' class="btn btn-default btn-sm")
+						i.fa.fa-sync-alt
+			.box-body
+						.container(style='width: 100%;')
+							.row(style='width: 100%;')
+								button(type='button' class='btn btn-primary btn-xs' style='float: right;' onclick='add_feed()')
+									i.fa.fa-plus
+										|NEW
+							.row.box#add_feed(class='varod slider hide_form' style='width: 100%;')
+								form.form-vertical#add_feed_form(action='/add_feed' method='post')
+									.form-group.form-row
+										label.col-md-2.col-form-label
+											|Title
+										.col-md-10
+											.input-group(style="width=50% !important;")
+												input#add_feed_form_title(type="text" class="form-control") 
+									.form-group.form-row
+										label.col-md-2.col-form-label
+											|Tags
+										.col-md-10
+											input#add_feed_form_tags(type="text" class="form-control") 
+									.form-group.form-row
+										label.col-md-2.col-form-label
+											|Url
+										.col-md-10
+											input#add_feed_form_url(type="text" class="form-control") 
+									.form-group.form-row
+										label.col-md-2.col-form-label
+										.col-md-10
+											button(type="submit" class="btn btn-success btn-xs" style="float: right;")
+												|Submit
+											button(type="button" onClick="cancel_add_feed()" class="btn btn-default btn-xs" style="float: right;")
+												|Close
+							.row#feeds_row(style='width: 100%;')
+									table#feeds.display.table-bordered.row-border(name="feeds_table" cellspacing="0" width="100%")
+										thead
+											tr
+												th Name
+												th Status
+										tbody
+										tfoot
+											tr
+												th Name
+												th Status
+		.box#kw_box
+			.box-header
+				i.fa.fa-search
+				h3.box-title
+					|KeyWords
+
+				.box-tools.pull-right
+					a(type="button" href='/library' class="btn btn-default btn-sm")
+						i.fa.fa-fingerprint
+					a(type="button" href='/feeds' class="btn btn-default btn-sm")
+						i.fa.fa-sync-alt
+			.box-body
+						.container(style='width: 100%;')
+							.row(style='width: 100%;')
+								button(type='button' class='btn btn-primary btn-xs' style='float: right;' onclick='add_kw()')
+									i.fa.fa-plus
+										|NEW
+							.row.box#add_kw(class='varod slider hide_form' style='width: 100%;')
+								form.form-vertical#add_kw_form(action='/add_kw' method='post')
+									.form-group.form-row
+										label.col-md-2.col-form-label
+											|KW
+										.col-md-10
+											input#add_kw_form_word(type="text" class="form-control") 
+									.form-group.form-row
+										label.col-md-2.col-form-label
+										.col-md-10
+											button(type="submit" class="btn btn-success btn-xs" style="float: right;")
+												|Submit
+											button(type="button" onClick="cancel_add_kw()" class="btn btn-default btn-xs" style="float: right;")
+												|Close
+							.row#kw_row(style='width: 100%;')
+								table#kws.display.table-bordered.row-border(name="kw_table" cellspacing="0" width="100%")
+									thead
+										tr
+											th KW
+											th Priority
+									tbody
+									tfoot
+										tr
+											th KW
+											th Priority
+
+block javascript
+	script(type='text/javascript', src='/feeds.js')

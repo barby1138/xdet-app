@@ -1,0 +1,231 @@
+extends layout/base 
+block content 
+	section.content-header
+		h1
+			i.fa.fa-tachometer-alt
+			|Dashboard
+			span(style="float:right;")
+					a(type="button" href='/' class="btn btn-default btn-sm")
+						i.fa.fa-sync-alt
+	section.content
+			.row
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon()
+											i.fa.fa-film
+										.info-box-content
+											span.info-box-text
+												|Idle
+											span#dl_idle_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:PaleTurquoise")
+											i.fa.fa-film
+										.info-box-content
+											span.info-box-text
+												|DL queued
+											span#dl_queued_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="color:red")
+											i.fa.fa-film
+										.info-box-content
+											span.info-box-text
+												|Error
+											span#dl_error_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box(style="background-color:yellow")
+										span.info-box-icon.bg-gray
+											i.far.fa-arrow-alt-circle-down
+										.info-box-content
+											span.info-box-text
+												|Today / Yesterday / Month
+											span#dl_today_yesterday_month_count.info-box-number
+												|0 / 0 / 0
+			.row
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:coral")
+											i.fas.fa-cogs
+										.info-box-content
+											span.info-box-text
+												|Last month
+											span#proc_thirtydays_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:coral")
+											i.fas.fa-cogs
+										.info-box-content
+											span.info-box-text
+												|Last week
+											span#proc_sevendays_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:coral")
+											i.fas.fa-cogs
+										.info-box-content
+											span.info-box-text
+												|Yesterday
+											span#proc_yesterday_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box(style="background-color:coral")
+										span.info-box-icon.bg-gray
+											i.fas.fa-cogs
+										.info-box-content
+											span.info-box-text
+												|Today (so far)
+											span#proc_today_count.info-box-number
+												|0
+			.row
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:yellowgreen")
+											i.fa.fa-eye
+										.info-box-content
+											span.info-box-text
+												|Last month Total / Unique
+											span#dets_thirtydays_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:yellowgreen")
+											i.fa.fa-eye
+										.info-box-content
+											span.info-box-text
+												|Last week Total / Unique
+											span#dets_sevendays_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:YellowGreen")
+											i.fa.fa-eye
+										.info-box-content
+											span.info-box-text
+												|Yesterday Total / Unique
+											span#dets_yesterday_count.info-box-number
+												|0
+								.col-md-3.col-sm-6.col-xs-12
+									.info-box(style="background-color:yellowgreen")
+										span.info-box-icon.bg-gray
+											i.fa.fa-eye
+										.info-box-content
+											span.info-box-text
+												|Today (so far) Total / Unique
+											span#dets_today_count.info-box-number
+												|0
+			//.col-xs-6.col-md-8
+			.row
+				.col-md-12
+					.box#dashb_box
+						.box-header.with-border
+						.box-body
+							.row
+								.col-md-8
+									canvas#chart1
+								.col-md-4
+									//.row
+									//.chart-responsive
+									//canvas#chart-area
+									p.text-center
+										|<strong>Summary (Unique)</strong>
+									.progress-group
+										span#dets_auto_name.progress-text
+											|auto accepted
+										span#dets_auto_count.progress-number
+											|0
+										.progress
+											#dets_auto_count_progress.progress-bar(style="width: 0%")
+									.progress-group
+										span#dets_accepted_name.progress-text
+											|accepted
+										span#dets_accepted_count.progress-number
+											|0
+										.progress
+											#dets_accepted_count_progress.progress-bar(style="width: 0%")
+									.progress-group
+										span#dets_await_name.progress-text
+											|await
+										span#dets_await_count.progress-number
+											|0
+										.progress
+											#dets_await_count_progress.progress-bar(style="width: 0%")
+									.progress-group
+										span#dets_rejected_name.progress-text
+											|rejected
+										span#dets_rejected_count.progress-number
+											|0
+										.progress
+											#dets_rejected_count_progress.progress-bar(style="width: 0%")
+
+			.row
+				.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:olive")
+											i.far.fa-play-circle
+										.info-box-content
+											span.info-box-text
+													|Tubes
+											span#feeds_total_count1.info-box-number
+													|3
+				.col-md-3.col-sm-6.col-xs-12
+									.info-box(style="background-color:olive")
+										span.info-box-icon.bg-gray
+											i.far.fa-play-circle
+										.info-box-content
+											span.info-box-text(style="text-align=center")
+													|Tubes (active)
+											span#feeds_active_count2.info-box-number
+													|3
+				.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:PaleTurquoise")
+											i.fa.fa-fingerprint
+										.info-box-content
+											span.info-box-text
+												|Markers
+											span#tracks_total_count1.info-box-number
+												|2000
+
+				.col-md-3.col-sm-6.col-xs-12
+									.info-box
+										span.info-box-icon(style="background-color:gold")
+											i.fa.fa-search
+										.info-box-content
+											span.info-box-text
+												|KeyWords
+											span#tracks_total_count2.info-box-number
+												|685
+
+
+			.row
+				.col-md-12
+					.box#dashb_box
+						.box-header.with-border
+						.box-body
+							.row
+								.col-md-4
+									.chart-responsive
+										canvas#pieChart
+								.col-md-4
+									.chart-responsive
+										canvas#pieChart_1
+								.col-md-4
+									.chart-responsive
+										canvas#pieChart_2
+
+								.col-md-4
+								
+				.col-md-3.col-sm-6.col-xs-12
+
+				.col-md-3.col-sm-6.col-xs-12
+
+				.col-md-3.col-sm-6.col-xs-12
+
+block javascript
+	script(type='text/javascript', src='/dashboard.js')

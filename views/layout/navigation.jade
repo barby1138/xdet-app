@@ -1,0 +1,31 @@
+.main-header
+	a(href='/').logo
+		span.logo-mini
+			|<b><font style="background-color: red" color='black'>&nbsp;X&nbsp;</font></b>
+		span.logo-lg
+			|<b><font style="background-color: red" color='black'>&nbsp;X&nbsp;</font>det</b>
+	nav.navbar.navbar-static-top 
+			a(href='#', role='button', style='font-family: "Font Awesome\ 5 Free"', data-toggle='push-manu').sidebar-toggle.fa5
+				span.sr-only 
+					|Toggle Navigation
+			div.navbar-custom-menu
+				ul.nav.navbar-nav
+					li.dropdown.user.user-menu
+						a(href='#', data-toggle='dropdown').dropdown-toggle
+							img(src='/img/dirk.jpg',alt='User Image').user-image
+						ul.dropdown-menu
+							li.user-header
+								img(src='/img/dirk.jpg',alt='User Image').img-circle
+								p
+									|Dirk Digdler
+									small
+										| Member since Jan. 2019
+
+							li.user-footer
+								.pull-left
+									a(href='/profile').btn.btn-default.btn-flat
+										| Profile
+								.pull-right
+									a(href='/logout').btn.btn-default.btn-flat
+										| Sign out
+
