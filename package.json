@@ -14,7 +14,7 @@
     "cors": "^2.8.4",
     "css-select": "^2.0.2",
     "dom-serializer": "^0.2.1",
-    "express": "^4.16.2",
+    "express": "^4.17.1",
     "express-session": "^1.15.6",
     "glob": "^7.1.2",
     "jade": "^1.11.0",
