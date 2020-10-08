@@ -163,7 +163,7 @@ var Pornsearch = function () {
 
           resolve(data);
         }).catch(function (error) {
-          console.warn(error);
+          //console.warn(error);
 
           reject(new Error('No results for search related to ' + url + ' in page ' + page));
         });

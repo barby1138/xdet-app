@@ -108,7 +108,7 @@ var Pornhub = function (_AbstractModule$with) {
 
         return {
           key: "kw:pornhub?" + query,
-          title: data.find('a').text().trim(),
+          title: data.find('a').text().trim().replace(/\s\s+/g, ' '),
           url: 'https://pornhub.com' + data.find('a').eq(0).attr('href'),
           duration: data.find('.duration').text(),
           thumb: thumb.replace(/\([^)]*\)/g, '')
@@ -179,7 +179,7 @@ var Pornhub = function (_AbstractModule$with) {
 
         var url = 'https://pornhub.com' + data.find('a').eq(0).attr('href')
         //console.log(url)
-        var title = data.find('a').text().trim()
+        var title = data.find('a').text().trim().replace(/\s\s+/g, ' ')
         //console.log(title)
         var duration = data.find('.duration').text()
         //console.log(duration)
@@ -225,7 +225,7 @@ var Pornhub = function (_AbstractModule$with) {
         
         return {
           key: "usr:pornhub?" + query,
-          title: data.find('a').text().trim(),
+          title: data.find('a').text().trim().replace(/\s\s+/g, ' '),
           url: 'https://pornhub.com' + data.find('a').eq(0).attr('href'),
           duration: data.find('.duration').text(),
           thumb: thumb.replace(/\([^)]*\)/g, '')

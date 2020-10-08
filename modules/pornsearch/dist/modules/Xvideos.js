@@ -64,6 +64,11 @@ var Xvideos = function (_AbstractModule$with) {
       return url
     }
   }, */{
+    key: 'videoSel',
+    value: function videoSel() {
+      return '#content .mozaique .thumb-block'
+    }
+  }, {
     key: 'user_videoSel',
     value: function user_videoSel() {
       return '.videos.row-3-thumbs li'
@@ -91,7 +96,7 @@ var Xvideos = function (_AbstractModule$with) {
           title: title.text(),
           url: 'https://xvideos.com' + title.attr('href'),
           duration: cache.find('.duration').text(),
-          thumb: cache.find('.thumb img').data('src').replace('thumbs169', 'thumbs169lll').replace('THUMBNUM', '5')
+          thumb: "dummy" //cache.find('.thumb img').data('src').replace('thumbs169', 'thumbs169lll').replace('THUMBNUM', '5')
         };
       }).get();
     }
@@ -112,7 +117,7 @@ var Xvideos = function (_AbstractModule$with) {
           key: "det_rltd:xvideos",
           title: title.text(),
           url: 'https://xvideos.com' + title.attr('href'),
-          duration: cache.find('.duration').text(),
+          duration: cache.find('.duration').text().substring(0,5),
           thumb: "" //cache.find('.thumb img').data('src').replace('thumbs169', 'thumbs169lll').replace('THUMBNUM', '5')
         };
       }).get();
