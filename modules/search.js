@@ -12,7 +12,8 @@ const mode_test = true
 let Searcher = null
 
 const db = require('./db')
-const pornsearch = require('pornsearch');
+//const pornsearch = require('pornsearch');
+const pornsearch = require('./pornsearch/dist/Pornsearch');
 
 const { tick } = require('./util')
 const { promisify } = require('util')
@@ -86,7 +87,7 @@ function id_parse(tube, url)
 
 const tube_config = {
     "pornhub" : { "do_js" : true },
-    "xvideos" : { "do_js" : true, "rltd_ceil" : 100 },
+    "xvideos" : { "do_js" : false, "rltd_ceil" : 100 },
     "xhamster" : { "do_js" : false, "videos_ceil" : 40 }
 }
 
@@ -944,9 +945,10 @@ function user_video_search_wrp(tube, dict, ind) {
 //user_video_search("xhamster", "nono1555")
 
 //user_video_search("pornhub", "technovscars")
+// not exist
 //user_video_search("pornhub", "avmedicinehead")
 
-
+// not exist
 //user_video_search("xvideos", "Romanboobs")
 
 

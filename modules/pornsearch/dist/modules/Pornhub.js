@@ -161,7 +161,7 @@ var Pornhub = function (_AbstractModule$with) {
         
         return {
           key: "det_rltd:pornhub",
-          title: data.find('a').text().trim(),
+          title: data.find('a').text().trim().replace(/\s\s+/g, ' '),
           url: 'https://pornhub.com' + data.find('a').eq(0).attr('href'),
           duration: data.find('.duration').text(),
           thumb: thumb.replace(/\([^)]*\)/g, '')
