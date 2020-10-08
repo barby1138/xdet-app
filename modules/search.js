@@ -7,7 +7,7 @@ const process_related = false
 let total_cnt = 0;
 let startKey = null
 
-const mode_test = false
+const mode_test = true
 
 let Searcher = null
 
@@ -87,7 +87,7 @@ function id_parse(tube, url)
 const tube_config = {
     "pornhub" : { "do_js" : true },
     "xvideos" : { "do_js" : true, "rltd_ceil" : 100 },
-    "xhamster" : { "do_js" : true, "videos_ceil" : 40 }
+    "xhamster" : { "do_js" : false, "videos_ceil" : 40 }
 }
 
 async function process_videos_custom_url(tube, url, selector) {
@@ -205,9 +205,9 @@ function put_all_videos_to_db(tube, all_videos) {
             console.log(str_id)
         }
         else {
-            console.log("url: " + video.url)
+            //console.log("url: " + video.url)
             //console.log(video)
-            console.error("url ID parse failed")
+            //console.error("url ID parse failed")
             return new Promise(resolve => { resolve(null) } )
             //callback("url ID parse failed", null)
         }
@@ -227,13 +227,13 @@ function put_all_videos_to_db(tube, all_videos) {
                 })
         }
         else {
-            console.log(tube)
-            console.log(video.title)
-            console.log(video.key)
-            console.log(video.duration)
-            console.log(video.url)
+            console.log("tube " + tube)
+            console.log("title " + video.title)
+            console.log("key " + video.key)
+            console.log("duration " + video.duration)
+            console.log("url " + video.url)
     
-            return
+            return new Promise(resolve => { resolve(null) } )
         }
     }))
 }
@@ -275,7 +275,6 @@ async function user_video_search(tube, user_name) {
     })
 }
 
-//kw_search("xhamster")
 async function kw_search(tube) {
     Searcher = new pornsearch(tube)
     // TODO init browser inside
@@ -350,9 +349,6 @@ async function kw_search(tube) {
 var self_all = []
 var all_users = []
 var all_channels = []
-//dets_related("pornhub")
-//dets_related("xvideos")
-//dets_related("xhamster")
 async function dets_related(tube) {
 
     const now = new Date();
@@ -369,11 +365,11 @@ async function dets_related(tube) {
 
         startKey = (data.LastEvaluatedKey != undefined) ? data.LastEvaluatedKey : null
 
-        data.Items = data .Items.filter(it => it.Analized_chunk_TS > thirtydaysbefore)
-                                .filter( it => it.Accept_status != 'rejected' && it.Feed_title == tube)
+        data.Items = data .Items
+                        //.filter(it => it.Analized_chunk_TS > thirtydaysbefore)
+                        .filter( it => it.Accept_status != 'rejected' && it.Feed_title == tube)
         let res = data.Items//.slice(200,400)
-        //let res = [data.Items[0],data.Items[1],data.Items[2]]
-        //let res = [data.Items[2]]
+
         return Promise.all(res .map(it => {
             console.log(it.Analized_chunk_loc)
     
@@ -838,9 +834,9 @@ const xh_users_test = [
     "xxxstokkazzo6",
 ]
 
-
-const ph_users_test = [ 'aroosatabeer',
-  'nudebarbarian'
+const ph_users_test = [ 
+    'aroosatabeer',
+    'nudebarbarian'
 ]
 
 const ph_users = [ 'aroosatabeer',
@@ -934,11 +930,8 @@ function user_video_search_wrp(tube, dict, ind) {
       
 }
 //user_video_search_wrp("xvideos", xv_users, 0)
-
 //user_video_search_wrp("pornhub", ph_users, 0)
 //user_video_search_wrp("xhamster", xh_users, 0)
-
-
 
 //user_video_search("xhamster", "jodale2100")
 //user_video_search("xhamster", "ironD")

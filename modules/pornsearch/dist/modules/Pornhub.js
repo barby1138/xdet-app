@@ -48,16 +48,29 @@ var Pornhub = function (_AbstractModule$with) {
 
   (0, _createClass3.default)(Pornhub, [{
     key: 'videoUrl',
-    value: function videoUrl(page) {
-      return 'http://www.pornhub.com/video/search?search=' + encodeURI(this.query) + '&page=' + (page || this.firstpage);
+    value: function videoUrl(query, page) {
+      return 'https://www.pornhub.com/video/search?search=' + encodeURI(query) + '&page=' + (page || this.firstpage);
     }
   }, {
     key: 'user_videoUrl',
-    value: function user_videoUrl(page) {
+    value: function user_videoUrl(query, page) {
       //TODO check user or channel
-      const url = 'http://www.pornhub.com/users/' + encodeURI(this.query) + '/videos/public?page=' + (page || this.firstpage)
+      const url = 'https://www.pornhub.com/users/' + encodeURI(query) + '/videos/public?page=' + (page || this.firstpage)
       //console.log(url)
       return url
+    }
+  },/* {
+    key: 'info_videoUrl',
+    value: function user_videoUrl(query, page) {
+      //TODO check user or channel
+      const url = encodeURI(query)
+      //console.log(url)
+      return url
+    }
+  }, */{
+    key: 'videoSel',
+    value: function videoSel() {
+      return 'ul.videos.search-video-thumbs li'
     }
   }, {
     key: 'user_videoSel',
@@ -65,13 +78,18 @@ var Pornhub = function (_AbstractModule$with) {
       return '.videos.row-3-thumbs li'
     }
   }, {
+    key: 'info_videoSel',
+    value: function info_videoSel() {
+      return 'ul.videos.underplayer-thumbs li'
+    }
+  }, {
     key: 'gifUrl',
-    value: function gifUrl(page) {
-      return 'http://www.pornhub.com/gifs/search?search=' + encodeURI(this.query) + '&page=' + (page || this.firstpage);
+    value: function gifUrl(query, page) {
+      return 'https://www.pornhub.com/gifs/search?search=' + encodeURI(query) + '&page=' + (page || this.firstpage);
     }
   }, {
     key: 'videoParser',
-    value: function videoParser($, b) {
+    value: function videoParser($, b, query) {
       //console.log(b)
       var videos = $('ul.videos.search-video-thumbs li');
       
@@ -89,23 +107,24 @@ var Pornhub = function (_AbstractModule$with) {
         var thumb = data.find('img').attr('data-mediumthumb') || '';
 
         return {
+          key: "kw:pornhub?" + query,
           title: data.find('a').text().trim(),
-          url: 'http://pornhub.com' + data.find('a').eq(0).attr('href'),
+          url: 'https://pornhub.com' + data.find('a').eq(0).attr('href'),
           duration: data.find('.duration').text(),
           thumb: thumb.replace(/\([^)]*\)/g, '')
         };
       }).get();
     }
   }, {
-    key: 'relatedVideoParser',
-    value: function relatedVideoParser($, b) {
+    key: 'info_videoParser',
+    value: function info_videoParser($, b, query) {
       //console.log(b)
       var users = $('.usernameWrap.clearfix');
       var users_new = users.map(function (i) {
         var data = users.eq(i)
         if (data.parent().text().indexOf("From:") != -1) {
           //console.log("user: " + data.attr("data-type"))
-          //console.log("user URL: " + 'http://pornhub.com' + data.find('a').eq(0).attr('href'))
+          //console.log("user URL: " + 'https://pornhub.com' + data.find('a').eq(0).attr('href'))
           return data
         }
       })
@@ -118,13 +137,15 @@ var Pornhub = function (_AbstractModule$with) {
       if (user != null) {
         const usr_name = user.find('a').eq(0).text()
         const usr_type = user.attr("data-type")
-        const usr_url = 'http://pornhub.com' + user.find('a').eq(0).attr('href')
+        const usr_url = 'https://pornhub.com' + user.find('a').eq(0).attr('href')
         //console.log("user type: " + usr_type)
         //console.log("user name: " + usr_name)
         //console.log("user URL: " + usr_url)
 
         user_dict = { "name" : usr_name, "type" : usr_type, "url" : usr_url}
       }
+
+      var side_videos = $("ul.related-video-thumbs.videos li")
 
       var videos = $('ul.videos.underplayer-thumbs li');
 
@@ -139,18 +160,54 @@ var Pornhub = function (_AbstractModule$with) {
         var thumb = data.find('img').attr('data-mediumthumb') || '';
         
         return {
+          key: "det_rltd:pornhub",
           title: data.find('a').text().trim(),
-          url: 'http://pornhub.com' + data.find('a').eq(0).attr('href'),
+          url: 'https://pornhub.com' + data.find('a').eq(0).attr('href'),
           duration: data.find('.duration').text(),
           thumb: thumb.replace(/\([^)]*\)/g, '')
         };
       }).get();
 
-      return {"usr" : user_dict, "r_videos" : r_videos}
+      //console.log("side videos")
+      var r_side_videos = side_videos.map(function (i) {
+        var data = side_videos.eq(i);
+        if (!data.length) {
+          return
+        }
+
+        var thumb = data.find('img').attr('data-mediumthumb') || '';
+
+        var url = 'https://pornhub.com' + data.find('a').eq(0).attr('href')
+        //console.log(url)
+        var title = data.find('a').text().trim()
+        //console.log(title)
+        var duration = data.find('.duration').text()
+        //console.log(duration)
+
+        return {
+          key: "det_rltd:pornhub?side",
+          title: title,
+          url: url,
+          duration: duration,
+          thumb: thumb.replace(/\([^)]*\)/g, '')
+        };
+      }).get();
+
+      r_side_videos.map(it => { r_videos.push(it) } )
+
+      return {  "self" : {"url" : query,
+                          "usr" : user_dict, 
+                          "models": [], 
+                          "date" : "", 
+                          "tags" : [], 
+                          "title" : "",
+                          "likes" : 0, 
+                          "dislikes" : 0},
+                "r_videos" : r_videos}
     }
   }, {
     key: 'user_videoParser',
-    value: function user_videoParser($, b) {
+    value: function user_videoParser($, b, query) {
       //console.log(b)
       //console.log(b)
       //#moreData
@@ -167,8 +224,9 @@ var Pornhub = function (_AbstractModule$with) {
         var thumb = data.find('img').attr('data-mediumthumb') || '';
         
         return {
+          key: "usr:pornhub?" + query,
           title: data.find('a').text().trim(),
-          url: 'http://pornhub.com' + data.find('a').eq(0).attr('href'),
+          url: 'https://pornhub.com' + data.find('a').eq(0).attr('href'),
           duration: data.find('.duration').text(),
           thumb: thumb.replace(/\([^)]*\)/g, '')
         };
@@ -184,7 +242,7 @@ var Pornhub = function (_AbstractModule$with) {
 
         return {
           title: data.find('span').text(),
-          url: 'http://dl.phncdn.com#id#.gif'.replace('#id#', data.attr('href')),
+          url: 'https://dl.phncdn.com#id#.gif'.replace('#id#', data.attr('href')),
           webm: data.find('video').attr('data-webm')
         };
       }).get();

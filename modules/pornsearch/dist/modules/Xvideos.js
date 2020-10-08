@@ -44,25 +44,38 @@ var Xvideos = function (_AbstractModule$with) {
 
   (0, _createClass3.default)(Xvideos, [{
     key: 'videoUrl',
-    value: function videoUrl(page) {
-      return 'https://www.xvideos.com/?k=' + encodeURI(this.query) + '&p=' + (page || this.firstpage);
+    value: function videoUrl(query, page) {
+      return 'https://www.xvideos.com/?k=' + encodeURI(query) + '&p=' + (page || this.firstpage);
     }
   }, {
     key: 'user_videoUrl',
-    value: function user_videoUrl(page) {
+    value: function user_videoUrl(query, page) {
       //TODO check user or channel
-      const url = 'http://www.xvideos.com/users/' + encodeURI(this.query) + '/videos/public?page=' + (page || this.firstpage)
+      const url = 'https://www.xvideos.com/users/' + encodeURI(query) + '/videos/public?page=' + (page || this.firstpage)
       //console.log(url)
       return url
     }
-  }, {
+  },/* {
+    key: 'info_videoUrl',
+    value: function user_videoUrl(query, page) {
+      //TODO check user or channel
+      const url = encodeURI(query)
+      //console.log(url)
+      return url
+    }
+  }, */{
     key: 'user_videoSel',
     value: function user_videoSel() {
       return '.videos.row-3-thumbs li'
     }
   }, {
+    key: 'info_videoSel',
+    value: function info_videoSel() {
+      return '#related-videos .mozaique .thumb-block'
+    }
+  }, {
     key: 'videoParser',
-    value: function videoParser($) {
+    value: function videoParser($, b, query) {
       var videos = $('#content .mozaique .thumb-block');
 
       return videos.map(function (i, video) {
@@ -74,6 +87,7 @@ var Xvideos = function (_AbstractModule$with) {
         }
 
         return {
+          key: "kw:xvideos?" + query,
           title: title.text(),
           url: 'https://xvideos.com' + title.attr('href'),
           duration: cache.find('.duration').text(),
@@ -82,11 +96,11 @@ var Xvideos = function (_AbstractModule$with) {
       }).get();
     }
   }, {
-    key: 'relatedVideoParser',
-    value: function relatedVideoParser($, b) {
+    key: 'info_videoParser',
+    value: function info_videoParser($, b, query) {
       var videos = $('#related-videos .mozaique .thumb-block');
 
-      return videos.map(function (i, video) {
+      var r_videos = videos.map(function (i, video) {
         var cache = $(video);
         var title = cache.find('p a').eq(0);
 
@@ -95,16 +109,29 @@ var Xvideos = function (_AbstractModule$with) {
         }
 
         return {
+          key: "det_rltd:xvideos",
           title: title.text(),
           url: 'https://xvideos.com' + title.attr('href'),
           duration: cache.find('.duration').text(),
           thumb: "" //cache.find('.thumb img').data('src').replace('thumbs169', 'thumbs169lll').replace('THUMBNUM', '5')
         };
       }).get();
+
+      var user_dict = { "name" : "bla", "type" : "bla", "url" : "bla"}
+
+      return {  "self" : {"url" : query,
+                          "usr" : user_dict, 
+                          "models": [], 
+                          "date" : "", 
+                          "tags" : [], 
+                          "title" : "",
+                          "likes" : 0, 
+                          "dislikes" : 0},
+                "r_videos" : r_videos}
     }
   }, {
     key: 'user_videoParser',
-    value: function user_videoParser($, b) {
+    value: function user_videoParser($, b, query) {
       var videos = $('#related-videos .mozaique .thumb-block');
 
       return videos.map(function (i, video) {
@@ -116,6 +143,7 @@ var Xvideos = function (_AbstractModule$with) {
         }
 
         return {
+          key: "usr:xvideos?" + query,
           title: title.text(),
           url: 'https://xvideos.com' + title.attr('href'),
           duration: cache.find('.duration').text(),

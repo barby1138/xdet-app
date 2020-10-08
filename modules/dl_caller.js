@@ -63,7 +63,7 @@ queryTubes_p(USER_ID)
 
     tubes_arr = data.Items.map(it => it.DL_Q_name)
 
-    //call_dl_q()
+    call_dl_q()
     tick(CALLDLQ_TO_MSEC, call_dl_q, null)
 })
 .catch((err) => { logger.error('queryTubes_p ERROR ' + err) } )
