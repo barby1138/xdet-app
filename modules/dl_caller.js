@@ -68,6 +68,35 @@ queryTubes_p(USER_ID)
 })
 .catch((err) => { logger.error('queryTubes_p ERROR ' + err) } )
 
+/*
+// put one job - for test
+queryUrlPH_idxProcState_p(USER_ID, "idle", 1, null)
+.then((data) => { 
+    logger.info('queryUrlPH_idxProcState_p OK ' + data.Count + ' ' + JSON.stringify(data.LastEvaluatedKey))
+    // TODO filter by KW priority
+    console.log(data.Items.length)
+    
+    data.Items.map(it => {
+        const id = it.PHID
+        const url = it.Path
+        const tube = it.Tube
+        logger.info(id)
+        logger.info(url)
+        logger.info(tube)
+        
+        updateUrlPH_procState_p(USER_ID, id, "dl_queued", null)
+        .then((res) => { 
+            logger.info('updateUrlPH_procState_p dl_queued OK') 
+
+            send_msg_to_dl(id, url, tube)
+            .then((res) => { logger.info('send_msg_to_dl OK') })
+            .catch((err) => { logger.info('send_msg_to_dl ERROR ' + err) } )
+        } )
+        .catch((err) => { logger.info('updateUrlPH_procState_p dl_queued ERROR ' + err) } )
+    })
+})
+.catch((err) => { logger.error('queryUrlPH_idxProcState_p ERROR ' + err) } )
+*/
 function call_dl_q() {
 
     return new Promise( (resolve, reject) => {

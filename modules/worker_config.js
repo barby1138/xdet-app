@@ -11,7 +11,7 @@ module.exports = Object.freeze({
     //DL CALLER
     DL_CALLER_Q_MAX_THSHLD: 400, //300,
     DL_CALLER_Q_MIN_THSHLD: 200, //100,
-    CALLDLQ_TO_MSEC: 30 * 60 * 1000,
+    CALLDLQ_TO_MSEC: 10 * 60 * 1000,
 
     //DL SOURCE
     DL_MAX_RETRIES: 3,

@@ -217,6 +217,7 @@ function download_one(msg) {
                 }
 
                 // local
+                /*
                 const writeStream = fs.createWriteStream(ARCH_PATH + '/' + file_name_str);
                 writeStream.on('error', function (err) {
                     logger.error('writeStream ERROR: ' + err) 
@@ -227,6 +228,7 @@ function download_one(msg) {
                 writeStream.on('finish', function (err) {
                     logger.info("writeStream on.finish") 
                 });
+                */
 
                 const video = youtubedl(url, args)
                  
